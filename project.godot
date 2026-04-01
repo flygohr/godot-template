@@ -14,6 +14,14 @@ config/name="godot-template"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ScenesManager="*uid://dttnxbrn83jg5"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

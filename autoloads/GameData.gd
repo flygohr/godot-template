@@ -1,13 +1,12 @@
-# Script to handle save and load functions
+# Script to store the game data that will end into a savefile and are needed to run the game
+# Kept separate from the SaveManager for compartimentalization
 
 extends Node
 
+const GAME_VERSION: float = 0.1
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+const KEY_GAME_VERSION: String = "game version"
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+const DEFAULT_GAME_DATA: Dictionary = {
+	KEY_GAME_VERSION: GAME_VERSION
+}
