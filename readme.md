@@ -1,19 +1,20 @@
 Working on a template with basic functionality that I can use for game jams.
 
 Want:
-- [ ] Main scene runnin the game inside
-	- [ ] Right now the whole tree gets replaced 
 - [x] Scenes manager
 	- [x] Main menu
 	- [x] Game
 	- [ ] Settings
 - [ ] Save system with:
 	- [ ] Save, load, reset game
+	- [ ] .tmp corruption protection, at least a basic ones
+	- [ ] Slots system, at last 3 datestamped previous .bak files per slot
 	- [ ] Export, import savefiles with native file pickers
 - [ ] Options menu with accessibility controls
 	- [ ] Separate config file to create, load, and save back
+	- [ ] Reset to default
 - [ ] Audio setup
-	- [ ] Main background music player
+	- [x] Main background music player
 	- [ ] Separate SFX manager 
 - [ ] Translation support right off the bat
 - [ ] Responsive landscape layout with proper margins for mobile devices
@@ -27,4 +28,5 @@ Want:
 	- Started work on the scenes manager
 	- Defined other important screens
 - 2023-04-02
+	- Learning about localization
 	- 
