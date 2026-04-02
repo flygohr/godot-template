@@ -11,7 +11,6 @@ var active_save_slot: int = 1
 
 # KEYS
 # Strings to organize the data into a Dictionary and later into a JSON
-
 const KEY_GAME_VERSION: String = "game version"
 
 # DEFAULT GAME DATA
