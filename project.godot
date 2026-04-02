@@ -11,12 +11,18 @@ config_version=5
 [application]
 
 config/name="godot-template"
+run/main_scene="uid://q3362xrshrsu"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://dsgfgjr67uiav"
 
 [autoload]
 
 ScenesManager="*uid://dttnxbrn83jg5"
+MusicManager="*uid://m6ppdobe31o3"
 
 [editor_plugins]
 

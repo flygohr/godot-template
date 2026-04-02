@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bbn1nvys51vyr"]
 
-[ext_resource type="Script" uid="uid://b46womubqo8na" path="res://scenes/loading_screen.gd" id="1_ep5rh"]
+[ext_resource type="Script" uid="uid://b46womubqo8na" path="res://scenes/loading_screen/loading_screen.gd" id="1_ep5rh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndlxt"]
 bg_color = Color(0, 0, 0, 1)
@@ -22,7 +22,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_hprjd"]
 resource_name = "transition"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -30,7 +30,7 @@ tracks/0/path = NodePath("Panel:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
