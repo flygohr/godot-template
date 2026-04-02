@@ -42,10 +42,9 @@ _data = {
 &"transition": SubResource("Animation_hprjd")
 }
 
-[node name="LoadingScreen" type="CanvasLayer" unique_id=1704258540 node_paths=PackedStringArray("animation_player")]
+[node name="LoadingScreen" type="CanvasLayer" unique_id=1704258540]
 layer = 10
 script = ExtResource("1_ep5rh")
-animation_player = NodePath("AnimationPlayer")
 
 [node name="Panel" type="Panel" parent="." unique_id=2127712752]
 modulate = Color(1, 1, 1, 0)

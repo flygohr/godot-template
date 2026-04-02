@@ -2,7 +2,7 @@ extends CanvasLayer
 
 signal loading_screen_ready
 
-@export var animation_player: AnimationPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	await animation_player.animation_finished

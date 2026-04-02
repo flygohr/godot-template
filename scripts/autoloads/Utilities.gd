@@ -23,3 +23,4 @@ func _dict_to_vec2(d: Dictionary) -> Vector2:
 	)
 
 # TODO: HEX color to string and viceversa
+# https://forum.godotengine.org/t/save-color-to-json-file/13745/2

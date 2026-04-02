@@ -4,7 +4,8 @@ extends Node
 signal progress_changed(progress)
 signal load_finished
 
-var loading_screen: PackedScene = preload(ScenesConstants.SCENE_PATHS[ScenesConstants.KEY_LOADING_SCREEN])
+const LOADING_SCREEN: PackedScene = preload(ScenesConstants.SCENE_PATHS[ScenesConstants.KEY_LOADING_SCREEN])
+
 var loaded_resource: PackedScene
 var scene_path: String
 var progress: Array = []
@@ -16,7 +17,7 @@ func _ready() -> void:
 func load_scene(_scene_path: String) -> void:
 	scene_path = _scene_path
 	
-	var new_load_screen = loading_screen.instantiate()
+	var new_load_screen = LOADING_SCREEN.instantiate()
 	add_child(new_load_screen)
 	progress_changed.connect(new_load_screen._on_progress_changed)
 	load_finished.connect(new_load_screen._on_load_finished)
