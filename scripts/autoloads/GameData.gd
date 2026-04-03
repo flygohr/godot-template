@@ -3,7 +3,8 @@
 
 extends Node
 
-const GAME_VERSION: float = 0.1
+const GAME_NAME: String = "Godot Jam Template"
+const GAME_VERSION: String = "0.1"
 
 # GAME DATA
 # Variables to keep track of during gameplay
@@ -22,4 +23,18 @@ const DEFAULT_GAME_DATA: Dictionary = {
 # CURRENT GAME DATA
 # Dictionary to load the current state of the game into, and to pass into SavesManager
 # Also polling this every time I need to know something
-var current: Dictionary = DEFAULT_GAME_DATA # Defaults to base game data on load
+# var current: Dictionary = DEFAULT_GAME_DATA # Defaults to base game data on load
+
+var current: Dictionary = {
+		"test name": "abcdefg",
+		"test int": 14,
+		"test float": 14.75,
+		"test bool": false,
+		"test vec3": Vector3(1,2,3),
+		"test vec2": Vector2(1,2),
+		"test color": Color.ALICE_BLUE
+	}
+
+func _ready() -> void:	
+	SavesManager.save_game(current)
+	SavesManager.load_save(current)

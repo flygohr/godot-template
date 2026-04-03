@@ -8,26 +8,6 @@ const SAVES_DIRECTORY: String = "saves"
 const SLOT_DIRECTORY_NAME: String = "slot_"
 const SAVE_NAME: String = "save.json"
 
-var mockup_save_data: Dictionary = {
-		"test name": "abcdefg",
-		"test int": 14,
-		"test vec3": Vector3(1,2,3),
-		"test vec2": Vector2(1,2),
-		"test color": Color.ALICE_BLUE
-	}
-
-var default_save_data: Dictionary = {
-		"test name": "hijklmno",
-		"test int": 41,
-		"test vec3": Vector3(4,5,6),
-		"test vec2": Vector2(3,4),
-		"test color": Color.GREEN_YELLOW
-	}
-
-func _ready() -> void:	
-	save_game(mockup_save_data)
-	load_save(mockup_save_data, default_save_data)
-
 # Feed this a dictionary of data and a number for the slot to save in
 func save_game(game_data: Dictionary, slot: int = 1) -> void:
 	
@@ -51,14 +31,15 @@ func save_game(game_data: Dictionary, slot: int = 1) -> void:
 		match typeof(game_data[key]):
 			TYPE_VECTOR2: game_data[key] = _vec2_to_dict(game_data[key])
 			TYPE_VECTOR3: game_data[key] = _vec3_to_dict(game_data[key])
-			TYPE_COLOR: game_data[key] = _color_to_dict(game_data[key]) # https://forum.godotengine.org/t/save-color-to-json-file/13745/2
+			TYPE_COLOR: game_data[key] = _color_to_dict(game_data[key])
+			TYPE_INT: game_data[key] = _int_to_dict(game_data[key])
 	var json_string = JSON.stringify(game_data)
 	print(str("The converted data looks like this: ", json_string))
 	opened_file.store_line(json_string)
 	opened_file.close()
 
-# Load the save from a slot, modify the game data that has been passed in reference, resort to default data if missing
-func load_save(game_data: Dictionary, defaults: Dictionary, slot: int = 1) -> void:
+# Load the save from a slot, match it to a passed-in pre-existing structure
+func load_save(game_data: Dictionary, slot: int = 1) -> void:
 	
 	# Checking if the saves directory exists, and if not, creating it
 	var file_path: String = str("user://",SAVES_DIRECTORY,"/",SLOT_DIRECTORY_NAME,slot,"/")
@@ -66,50 +47,83 @@ func load_save(game_data: Dictionary, defaults: Dictionary, slot: int = 1) -> vo
 	
 	var save_file: String = str(file_path, SAVE_NAME)
 	if FileAccess.file_exists(save_file):
+		
+		# Opening save slot and grabbing saved string
 		print("Now loading game data")
 		var opened_file: FileAccess = FileAccess.open(save_file, FileAccess.READ)
 		var string_data: String = opened_file.get_line()
 		print(str("Loaded game data is: ", string_data))
+		opened_file.close()
+		
+		# Parsing opened string as JSON
 		var json = JSON.new()
 		if json.parse(string_data) == OK:
-			game_data = json.get_data()
+			var parsed_game_data: Dictionary = json.get_data()
+			for key in parsed_game_data:
+				if typeof(parsed_game_data[key]) == TYPE_DICTIONARY and parsed_game_data[key].has("type") == true: # Check for known Variants to convert back
+					match parsed_game_data[key]["type"]:
+						"Vector2": parsed_game_data[key] = _dict_to_vec2(parsed_game_data[key])
+						"Vector3": parsed_game_data[key] = _dict_to_vec3(parsed_game_data[key])
+						"Color": parsed_game_data[key] = _dict_to_color(parsed_game_data[key])
+						"int": parsed_game_data[key] = _dict_to_int(parsed_game_data[key])
+			parsed_game_data.sort()
+			print(str("Parsed loaded data now is: ", parsed_game_data))
+			
+			# Matching parsed data to pre-existing game data. This verifies the data and drops old keys
 			for key in game_data:
-				if typeof(game_data[key]) == TYPE_DICTIONARY and game_data[key].has("type") == true:
-					print(key)
-					match game_data[key]["type"]:
-						"Vector2": game_data[key] = _dict_to_vec2(game_data[key])
-						"Vector3": game_data[key] = _dict_to_vec3(game_data[key])
-						"Color": game_data[key] = _dict_to_color(game_data[key])
-			opened_file.close()
+				if parsed_game_data.has(key): game_data[key] = parsed_game_data[key]
 			game_data.sort()
-			print(str("Parsed loaded data now is: ", game_data))
-		opened_file.close()
-	else:
-		game_data = defaults.duplicate_deep()
+			print("Loaded data looks like this: ", game_data)
+			
+		else: push_error(str("Error parsing string from opened file: ", json.get_error_message()))
 		
-	
+	else:
+		print("No game data found. Keeping data as is.")
+		
+# Checking if the saves directory exists, and if not, creating it	
 func check_saves_directory(file_path: String):
-	# Checking if the saves directory exists, and if not, creating it
 	if DirAccess.dir_exists_absolute(file_path) == false:
 		print(str("Saves directory doesn't exist yet, creating it at: ", file_path))
 		DirAccess.make_dir_recursive_absolute(file_path)
 	print(str("Accessing saves directory at: ", file_path))
 
-## Export the save file of a slot using the native file picker for ease of transfer
-#func export_save(slot: int = 1) -> void:
-	#pass
-	#
+# Export the save file of a slot using the native file picker for ease of transfer
+func export_save(game_data: Dictionary, game_name: String = "", game_version: String = "", slot: int = 1) -> void:
+	# Make sure to save the up-to-date data
+	print("Starting to compile data for savegame export")
+	save_game(game_data,slot)
+	
+	# Opening the newly saved file and pushing JavaScript for download
+	var file_path: String = str("user://",SAVES_DIRECTORY,"/",SLOT_DIRECTORY_NAME,slot,"/")
+	var save_file: String = str(file_path, SAVE_NAME)
+	
+	if FileAccess.file_exists(save_file):
+		print("Save file has been opened for export")
+		var opened_file: FileAccess = FileAccess.open(save_file, FileAccess.READ)
+		var string_data: String = opened_file.get_line()
+		opened_file.close()
+		var file_to_save_name: String = str(game_name.replace(" ", "_"),"_",game_version,"_slot_",slot,"_",SAVE_NAME.replace(" ", "_")).to_lower()
+		
+		var buffer: PackedByteArray = string_data.to_utf8_buffer()
+		
+		JavaScriptBridge.download_buffer(buffer, file_to_save_name)
+		
+	else: push_error("Couldn't export the save file, savegame doesn't exists")
+
+
 ## Import a save file into a slot, through the native file picker for ease of transfer
 #func import_save(slot: int = 1) -> void:
 	#pass
-#
-## Verify the save file, see that it matches keys and static typings. Return true if OK, false if not
-#func verify_save(save_data: Dictionary, base_data: Dictionary) -> bool:
-	#return true
 
 
 # Functions to handle Variants unsupported by JSON
 # Stored as dictionaries and recognized by key "type" : "Variant"
+
+func _int_to_dict(i: int) -> Dictionary:
+	return {"type": "int", "value": i}
+
+func _dict_to_int(d: Dictionary) -> int:
+	return int(d["value"])
 
 func _vec3_to_dict(v: Vector3) -> Dictionary:
 	return {"type": "Vector3", "x": v.x, "y": v.y, "z": v.z}
@@ -131,7 +145,7 @@ func _dict_to_vec2(d: Dictionary) -> Vector2:
 	)
 
 func _color_to_dict(c: Color) -> Dictionary:
-	return {"type": "Color", "html": c.to_html()}
+	return {"type": "Color", "html": c.to_html()}  # https://forum.godotengine.org/t/save-color-to-json-file/13745/2
 	
 func _dict_to_color(d: Dictionary) -> Color:
 	return Color(d["html"])
