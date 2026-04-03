@@ -9,11 +9,19 @@ const SAVE_NAME: String = "save.json"
 
 # Feed this a dictionary of data and a number for the slot to save in (preparing this to be multi-slot)
 func save_game(game_data: Dictionary, slot: int = 1) -> void:
-	pass
+	var file: FileAccess = FileAccess.open(str(SAVES_PATH,"slot_",slot,"/",SAVE_NAME), FileAccess.WRITE)
+	file.store_var(game_data) # TODO: replace store_var and get_var with the JSON methods for security
+	file.close()
 
 # Load the save from a slot, modify the game data that has been passed in reference
 func load_save(game_data: Dictionary, slot: int = 1) -> void:
-	pass
+	if FileAccess.file_exists(str(SAVES_PATH,"slot_",slot,"/",SAVE_NAME)):
+		var file: FileAccess = FileAccess.open(str(SAVES_PATH,"slot_",slot,"/",SAVE_NAME), FileAccess.READ)
+		var data: Dictionary = file.get_var()
+		for i in data:
+			if game_data.has(i):
+				game_data[i] = data[i]
+		file.close()
 	
 # Export the save file of a slot using the native file picker for ease of transfer
 func export_save(slot: int = 1) -> void:
