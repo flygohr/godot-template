@@ -16,11 +16,19 @@ var mockup_save_data: Dictionary = {
 		"test color": Color.ALICE_BLUE
 	}
 
+var default_save_data: Dictionary = {
+		"test name": "hijklmno",
+		"test int": 41,
+		"test vec3": Vector3(4,5,6),
+		"test vec2": Vector2(3,4),
+		"test color": Color.GREEN_YELLOW
+	}
+
 func _ready() -> void:	
 	save_game(mockup_save_data)
-	load_save(mockup_save_data)
+	load_save(mockup_save_data, default_save_data)
 
-# Feed this a dictionary of data and a number for the slot to save in (preparing this to be multi-slot)
+# Feed this a dictionary of data and a number for the slot to save in
 func save_game(game_data: Dictionary, slot: int = 1) -> void:
 	
 	# Checking if the saves directory exists, and if not, creating it
@@ -37,13 +45,20 @@ func save_game(game_data: Dictionary, slot: int = 1) -> void:
 		return
 		
 	#TODO: Write to a .tmp file first
+	game_data.sort()
+	print(str("Converting this data to JSON: ", game_data))
+	for key in game_data:
+		match typeof(game_data[key]):
+			TYPE_VECTOR2: game_data[key] = _vec2_to_dict(game_data[key])
+			TYPE_VECTOR3: game_data[key] = _vec3_to_dict(game_data[key])
+			TYPE_COLOR: game_data[key] = _color_to_dict(game_data[key]) # https://forum.godotengine.org/t/save-color-to-json-file/13745/2
 	var json_string = JSON.stringify(game_data)
-	print(json_string)
+	print(str("The converted data looks like this: ", json_string))
 	opened_file.store_line(json_string)
 	opened_file.close()
 
-# Load the save from a slot, modify the game data that has been passed in reference
-func load_save(game_data: Dictionary, slot: int = 1) -> void:
+# Load the save from a slot, modify the game data that has been passed in reference, resort to default data if missing
+func load_save(game_data: Dictionary, defaults: Dictionary, slot: int = 1) -> void:
 	
 	# Checking if the saves directory exists, and if not, creating it
 	var file_path: String = str("user://",SAVES_DIRECTORY,"/",SLOT_DIRECTORY_NAME,slot,"/")
@@ -54,22 +69,24 @@ func load_save(game_data: Dictionary, slot: int = 1) -> void:
 		print("Now loading game data")
 		var opened_file: FileAccess = FileAccess.open(save_file, FileAccess.READ)
 		var string_data: String = opened_file.get_line()
+		print(str("Loaded game data is: ", string_data))
 		var json = JSON.new()
 		if json.parse(string_data) == OK:
 			game_data = json.get_data()
+			for key in game_data:
+				if typeof(game_data[key]) == TYPE_DICTIONARY and game_data[key].has("type") == true:
+					print(key)
+					match game_data[key]["type"]:
+						"Vector2": game_data[key] = _dict_to_vec2(game_data[key])
+						"Vector3": game_data[key] = _dict_to_vec3(game_data[key])
+						"Color": game_data[key] = _dict_to_color(game_data[key])
 			opened_file.close()
-			print(str("Loaded game data is: ", game_data))
+			game_data.sort()
+			print(str("Parsed loaded data now is: ", game_data))
 		opened_file.close()
 	else:
-		pass # Place default game data here if missing, also accept default game data as parameter
+		game_data = defaults.duplicate_deep()
 		
-		
-	#var string_data: String = save_file.get_line()
-		#if json.parse(string_data) == OK:
-			#var data: Dictionary = json.get_data()
-			#save_file.close()
-			#return data
-		#push_error("Corrupted data")
 	
 func check_saves_directory(file_path: String):
 	# Checking if the saves directory exists, and if not, creating it
@@ -90,4 +107,31 @@ func check_saves_directory(file_path: String):
 #func verify_save(save_data: Dictionary, base_data: Dictionary) -> bool:
 	#return true
 
-#TODO: make this independent of the gamedata, just a standalone file that works with dictionaries and returns dictionaries
+
+# Functions to handle Variants unsupported by JSON
+# Stored as dictionaries and recognized by key "type" : "Variant"
+
+func _vec3_to_dict(v: Vector3) -> Dictionary:
+	return {"type": "Vector3", "x": v.x, "y": v.y, "z": v.z}
+	
+func _dict_to_vec3(d: Dictionary) -> Vector3:
+	return Vector3(
+		d.get("x", 0.0),
+		d.get("y", 0.0),
+		d.get("z", 0.0)
+	)
+	
+func _vec2_to_dict(v: Vector2) -> Dictionary:
+	return {"type": "Vector2", "x": v.x, "y": v.y}
+	
+func _dict_to_vec2(d: Dictionary) -> Vector2:
+	return Vector2(
+		d.get("x", 0.0),
+		d.get("y", 0.0)
+	)
+
+func _color_to_dict(c: Color) -> Dictionary:
+	return {"type": "Color", "html": c.to_html()}
+	
+func _dict_to_color(d: Dictionary) -> Color:
+	return Color(d["html"])
