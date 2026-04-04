@@ -4,12 +4,13 @@ Want:
 - [x] Scenes manager
 	- [x] Main menu
 	- [x] Game
-	- [ ] Settings
+	- [x] Settings
+		- [ ] Settings should look different in-game, and from the main menu (?)
 - [ ] Save system with:
-	- [ ] Save, load, reset game
+	- [x] Save, load, reset game -> Resetting a game will be done by the GameData, the SavesManager just takes care of replacing a slot with empty data or smth
 	- [ ] .tmp corruption protection, at least a basic ones
-	- [ ] Slots system, at last 3 datestamped previous .bak files per slot
-	- [ ] Export, import savefiles with native file pickers
+	- [x] Slots system, at last 3 datestamped previous .bak files per slot
+	- [ ] Export, import savefiles with native file pickers -> Web builds work a little different, need JavaScript
 - [ ] Options menu with accessibility controls
 	- [ ] Separate config file to create, load, and save back
 	- [ ] Reset to default
@@ -29,4 +30,8 @@ Want:
 	- Defined other important screens
 - 2023-04-02
 	- Learning about localization
+- 2023-04-03
+	- Adding save and load
+	- Added download savegame
+- 2023-04-04
 	- 

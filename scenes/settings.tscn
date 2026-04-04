@@ -28,5 +28,12 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "EXPORT SAVE"
 
+[node name="ImportSaveButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=315117211]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "IMPORT SAVE"
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/ExportSaveButton" to="." method="_on_export_save_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/ImportSaveButton" to="." method="_on_import_save_button_pressed"]

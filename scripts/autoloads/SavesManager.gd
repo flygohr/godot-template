@@ -110,11 +110,15 @@ func export_save(game_data: Dictionary, game_name: String = "", game_version: St
 		
 	else: push_error("Couldn't export the save file, savegame doesn't exists")
 
-
-## Import a save file into a slot, through the native file picker for ease of transfer
-#func import_save(slot: int = 1) -> void:
-	#pass
-
+# Prompts the user for a .json file, validates it, and imports it into the data passed in reference
+# Using HTML5 File Dialog plugin
+func import_save(game_data: Dictionary, slot: int = 1) -> void:
+	var file_dialog = HTML5FileDialog.new()
+	file_dialog.filters.append('accept=".png"')
+	add_child(file_dialog)
+	file_dialog.show()
+	var json_file = await(file_dialog.files_selected)
+	print(json_file)
 
 # Functions to handle Variants unsupported by JSON
 # Stored as dictionaries and recognized by key "type" : "Variant"
