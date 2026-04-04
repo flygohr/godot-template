@@ -17,18 +17,43 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8cj0n")
 
-[node name="Button" type="Button" parent="CanvasLayer" unique_id=498123258]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BackButton" type="Button" parent="CanvasLayer" unique_id=498123258]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -201.0
+offset_top = 26.0
+offset_right = -25.999268
+offset_bottom = 57.0
+grow_horizontal = 0
 text = "BACK TO MAIN MENU"
 
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[node name="SettingsButton" type="Button" parent="CanvasLayer" unique_id=605903451]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -201.0
+offset_top = 69.0
+offset_right = -25.999268
+offset_bottom = 100.0
+grow_horizontal = 0
+text = "SETTINGS"
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer" unique_id=1986172031]
+offset_left = 159.0
+offset_top = 143.0
+offset_right = 483.0
+offset_bottom = 282.0
+placeholder_text = "Placeholder text"
+
+[node name="TempSaveButton" type="Button" parent="CanvasLayer" unique_id=1691268821]
+offset_left = 291.0
+offset_top = 317.0
+offset_right = 338.0
+offset_bottom = 348.0
+text = "SAVE"
+
+[connection signal="pressed" from="CanvasLayer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="text_changed" from="CanvasLayer/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="CanvasLayer/TempSaveButton" to="." method="_on_temp_save_button_pressed"]

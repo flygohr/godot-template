@@ -26,15 +26,14 @@ const DEFAULT_GAME_DATA: Dictionary = {
 # var current: Dictionary = DEFAULT_GAME_DATA # Defaults to base game data on load
 
 var current: Dictionary = {
-		"test name": "abcdefg",
-		"test int": 14,
-		"test float": 14.75,
-		"test bool": false,
-		"test vec3": Vector3(1,2,3),
-		"test vec2": Vector2(1,2),
-		"test color": Color.ALICE_BLUE
+		"test textedit": ""
 	}
 
-func _ready() -> void:	
-	SavesManager.save_game(current)
-	SavesManager.load_save(current)
+func _ready() -> void:
+	SavesManager.load_save(current, active_save_slot)
+
+func initiate_load_game_data() -> void:
+	SavesManager.load_save(current, active_save_slot)
+
+func initiate_save_game_data() -> void:
+	SavesManager.save_game(current, active_save_slot)

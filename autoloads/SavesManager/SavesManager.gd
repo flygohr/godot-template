@@ -56,27 +56,14 @@ func load_save(game_data: Dictionary, slot: int = 1) -> void:
 		opened_file.close()
 		
 		# Parsing opened string as JSON
-		var json = JSON.new()
-		if json.parse(string_data) == OK:
-			var parsed_game_data: Dictionary = json.get_data()
-			for key in parsed_game_data:
-				if typeof(parsed_game_data[key]) == TYPE_DICTIONARY and parsed_game_data[key].has("type") == true: # Check for known Variants to convert back
-					match parsed_game_data[key]["type"]:
-						"Vector2": parsed_game_data[key] = _dict_to_vec2(parsed_game_data[key])
-						"Vector3": parsed_game_data[key] = _dict_to_vec3(parsed_game_data[key])
-						"Color": parsed_game_data[key] = _dict_to_color(parsed_game_data[key])
-						"int": parsed_game_data[key] = _dict_to_int(parsed_game_data[key])
-			parsed_game_data.sort()
-			print(str("Parsed loaded data now is: ", parsed_game_data))
+		var parsed_game_data: Dictionary = await _parse_game_data(string_data)
 			
-			# Matching parsed data to pre-existing game data. This verifies the data and drops old keys
-			for key in game_data:
-				if parsed_game_data.has(key): game_data[key] = parsed_game_data[key]
-			game_data.sort()
-			print("Loaded data looks like this: ", game_data)
-			
-		else: push_error(str("Error parsing string from opened file: ", json.get_error_message()))
-		
+		# Matching parsed data to pre-existing game data. This verifies the data and drops old keys
+		for key in game_data:
+			if parsed_game_data.has(key): game_data[key] = parsed_game_data[key]
+		game_data.sort()
+		print("Loaded data looks like this: ", game_data)
+
 	else:
 		print("No game data found. Keeping data as is.")
 		
@@ -104,22 +91,49 @@ func export_save(game_data: Dictionary, game_name: String = "", game_version: St
 		opened_file.close()
 		var file_to_save_name: String = str(game_name.replace(" ", "_"),"_",game_version,"_slot_",slot,"_",SAVE_NAME.replace(" ", "_")).to_lower()
 		
-		var buffer: PackedByteArray = string_data.to_utf8_buffer()
-		
-		JavaScriptBridge.download_buffer(buffer, file_to_save_name)
+		if OS.get_name() == 'Web': # Export save works only on web builds for now
+			var buffer: PackedByteArray = string_data.to_utf8_buffer()
+			JavaScriptBridge.download_buffer(buffer, file_to_save_name)
+		else: push_error("Error trying to export save file: unsupported device")
 		
 	else: push_error("Couldn't export the save file, savegame doesn't exists")
 
 # Prompts the user for a .json file, validates it, and imports it into the data passed in reference
 # Using HTML5 File Dialog plugin
 func import_save(game_data: Dictionary, slot: int = 1) -> void:
-	var file_dialog = HTML5FileDialog.new()
-	file_dialog.filters.append(".json")
-	add_child(file_dialog)
-	file_dialog.show()
-	var file_data: HTML5FileHandle = await file_dialog.file_selected
-	var json_data = await file_data.as_text()
-	print(json_data)
+	if OS.get_name() == 'Web': # File system for web exports
+		var file_dialog = HTML5FileDialog.new()
+		file_dialog.filters.append(".json")
+		add_child(file_dialog)
+		file_dialog.show()
+		var file_data: HTML5FileHandle = await file_dialog.file_selected
+		var string_data = await file_data.as_text()
+		# Now I can turn the string data into a json, then into a dictionary, and feeding it into load_save
+		# I might need to turn the json parsing into its own function to prevent duplicate files
+		var parsed_data: Dictionary = await _parse_game_data(string_data)
+		print(str("Successfully imported this data: ", parsed_data))
+		await save_game(parsed_data, slot)
+		await load_save(game_data, slot)
+
+	else: push_error("Error trying to import save file: unsupported device")
+
+func _parse_game_data(data: String) -> Dictionary:
+	var json = JSON.new()
+	if json.parse(data) == OK:
+		var parsed_data: Dictionary = json.get_data()
+		for key in parsed_data:
+			if typeof(parsed_data[key]) == TYPE_DICTIONARY and parsed_data[key].has("type") == true: # Check for known Variants to convert back
+				match parsed_data[key]["type"]:
+					"Vector2": parsed_data[key] = _dict_to_vec2(parsed_data[key])
+					"Vector3": parsed_data[key] = _dict_to_vec3(parsed_data[key])
+					"Color": parsed_data[key] = _dict_to_color(parsed_data[key])
+					"int": parsed_data[key] = _dict_to_int(parsed_data[key])
+		parsed_data.sort()
+		print(str("Data has been parsed into a Dictionary: ", parsed_data))
+		return parsed_data
+	else:
+		push_error(str("Error parsing string: ", json.get_error_message()))
+		return {}
 
 # Functions to handle Variants unsupported by JSON
 # Stored as dictionaries and recognized by key "type" : "Variant"

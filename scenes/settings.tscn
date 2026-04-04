@@ -20,7 +20,13 @@ size_flags_vertical = 4
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-text = "BACK"
+text = "BACK TO MAIN MENU"
+
+[node name="BackToGameButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=405874887]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "BACK TO GAME"
 
 [node name="ExportSaveButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=850701326]
 layout_mode = 2
@@ -35,5 +41,6 @@ size_flags_vertical = 6
 text = "IMPORT SAVE"
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/BackToGameButton" to="." method="_on_back_to_game_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/ExportSaveButton" to="." method="_on_export_save_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/ImportSaveButton" to="." method="_on_import_save_button_pressed"]
