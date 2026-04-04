@@ -2,15 +2,17 @@ Working on a template with basic functionality that I can use for game jams.
 
 Want:
 - [x] Scenes manager
-	- [x] Main menu
-	- [x] Game
-	- [x] Settings
-		- [ ] Settings should look different in-game, and from the main menu (?)
 - [ ] Save system with:
 	- [x] Save, load, reset game -> Resetting a game will be done by the GameData, the SavesManager just takes care of replacing a slot with empty data or smth
 	- [ ] .tmp corruption protection, at least a basic ones
 	- [x] Slots system, at last 3 datestamped previous .bak files per slot
-	- [ ] Export, import savefiles with native file pickers -> Web builds work a little different, need JavaScript
+	- [x] Export, import savefiles with native file pickers -> Web builds work a little different, need JavaScript
+- [ ] Various game screens and enstablished flow
+	- [x] Main menu
+	- [x] Game
+	- [x] Settings
+		- [ ] In-game settings with import / export, back to main menu
+		- [ ] Title screen settings with just music and sfx controls
 - [ ] Options menu with accessibility controls
 	- [ ] Separate config file to create, load, and save back
 	- [ ] Reset to default
@@ -18,7 +20,7 @@ Want:
 	- [x] Main background music player
 	- [ ] Separate SFX manager 
 - [ ] Translation support right off the bat
-- [ ] Responsive landscape layout with proper margins for mobile devices
+- [ ] Responsive landscape layout with proper margins for mobile devices, and proper UI scale
 
 ### Devlog:
 - 2023-03-31
@@ -34,4 +36,4 @@ Want:
 	- Adding save and load
 	- Added download savegame
 - 2023-04-04
-	- 
+	- Finished setting up HTML5 File Dialogs
