@@ -114,11 +114,12 @@ func export_save(game_data: Dictionary, game_name: String = "", game_version: St
 # Using HTML5 File Dialog plugin
 func import_save(game_data: Dictionary, slot: int = 1) -> void:
 	var file_dialog = HTML5FileDialog.new()
-	file_dialog.filters.append('accept=".png"')
+	file_dialog.filters.append(".json")
 	add_child(file_dialog)
 	file_dialog.show()
-	var json_file = await(file_dialog.files_selected)
-	print(json_file)
+	var file_data: HTML5FileHandle = await file_dialog.file_selected
+	var json_data = await file_data.as_text()
+	print(json_data)
 
 # Functions to handle Variants unsupported by JSON
 # Stored as dictionaries and recognized by key "type" : "Variant"
