@@ -7,40 +7,43 @@ script = ExtResource("1_5p8wc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=227505281]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=831364099]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1607318817]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=831364099]
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=662541628]
+[node name="BackButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=662541628]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "BACK TO MAIN MENU"
 
-[node name="BackToGameButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=405874887]
+[node name="BackToGameButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=405874887]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "BACK TO GAME"
 
-[node name="ExportSaveButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=850701326]
+[node name="ExportSaveButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=850701326]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "EXPORT SAVE"
 
-[node name="ImportSaveButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=315117211]
+[node name="ImportSaveButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=315117211]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "IMPORT SAVE"
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/BackToGameButton" to="." method="_on_back_to_game_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/ExportSaveButton" to="." method="_on_export_save_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/ImportSaveButton" to="." method="_on_import_save_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/BackToGameButton" to="." method="_on_back_to_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/ExportSaveButton" to="." method="_on_export_save_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/ImportSaveButton" to="." method="_on_import_save_button_pressed"]

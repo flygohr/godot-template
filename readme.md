@@ -1,4 +1,4 @@
-Working on a template with basic functionality that I can use for game jams.
+Working on a template with basic functionalities that I can use for game jams.
 
 Want:
 - [x] Scenes manager
@@ -7,12 +7,21 @@ Want:
 	- [ ] .tmp corruption protection, at least a basic ones
 	- [x] Slots system, at last 3 datestamped previous .bak files per slot
 	- [x] Export, import savefiles with native file pickers -> Web builds work a little different, need JavaScript
+		- [ ] Issues on iOS. If I don't solve them, need a replacement. Something like copy and pasting JSON data might work, let's see if OS clipboard works cross platform -> https://www.reddit.com/r/godot/s/JYh8wAo7V7. also no keyboard support, see https://godotengine.org/article/godot-web-progress-report-7/
 - [ ] Various game screens and enstablished flow
-	- [x] Main menu
+	- [ ] Startup screen
+	- [x] Title screen
+		- [ ] New game / Continue (start a new game, resume last saved slot)
+		- [ ] Load game (open save slots manager)
+		- [ ] Options (open settings)
+		- [ ] Quit game
+	- [ ] Load game screen / saves manager (select a slot, play from it)
 	- [x] Game
 	- [x] Settings
-		- [ ] In-game settings with import / export, back to main menu
-		- [ ] Title screen settings with just music and sfx controls
+		- [ ] Back (to main menu / to game screen)
+		- [ ] Music and sfx controls
+		- [ ] Save game
+		- [ ] Load save -> saves manager
 - [ ] Options menu with accessibility controls
 	- [ ] Separate config file to create, load, and save back
 	- [ ] Reset to default
