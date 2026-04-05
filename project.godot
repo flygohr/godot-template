@@ -25,6 +25,12 @@ ScenesManager="*uid://dttnxbrn83jg5"
 MusicManager="*uid://m6ppdobe31o3"
 GameData="*uid://c6vensvjc2kmx"
 SavesManager="*uid://bqphpexlqus52"
+DebugInfo="*uid://de8n5gdg7gtbr"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 

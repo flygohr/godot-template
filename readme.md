@@ -37,3 +37,7 @@ Want:
 	- Added download savegame
 - 2023-04-04
 	- Finished setting up HTML5 File Dialogs
+- 2023-04-05
+	- Added an on-screen debugger option to check stuff on mobile
+	- Started fiddling with screen sizes
+	- Troubleshooting the web export not working on iOS

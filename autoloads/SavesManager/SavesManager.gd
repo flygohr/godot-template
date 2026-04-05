@@ -56,7 +56,7 @@ func load_save(game_data: Dictionary, slot: int = 1) -> void:
 		opened_file.close()
 		
 		# Parsing opened string as JSON
-		var parsed_game_data: Dictionary = await _parse_game_data(string_data)
+		var parsed_game_data: Dictionary = _parse_game_data(string_data)
 			
 		# Matching parsed data to pre-existing game data. This verifies the data and drops old keys
 		for key in game_data:
@@ -92,6 +92,7 @@ func export_save(game_data: Dictionary, game_name: String = "", game_version: St
 		var file_to_save_name: String = str(game_name.replace(" ", "_"),"_",game_version,"_slot_",slot,"_",SAVE_NAME.replace(" ", "_")).to_lower()
 		
 		if OS.get_name() == 'Web': # Export save works only on web builds for now
+			DebugInfo.add_line(string_data)
 			var buffer: PackedByteArray = string_data.to_utf8_buffer()
 			JavaScriptBridge.download_buffer(buffer, file_to_save_name)
 		else: push_error("Error trying to export save file: unsupported device")
@@ -110,10 +111,10 @@ func import_save(game_data: Dictionary, slot: int = 1) -> void:
 		var string_data = await file_data.as_text()
 		# Now I can turn the string data into a json, then into a dictionary, and feeding it into load_save
 		# I might need to turn the json parsing into its own function to prevent duplicate files
-		var parsed_data: Dictionary = await _parse_game_data(string_data)
+		var parsed_data: Dictionary = _parse_game_data(string_data)
 		print(str("Successfully imported this data: ", parsed_data))
-		await save_game(parsed_data, slot)
-		await load_save(game_data, slot)
+		save_game(parsed_data, slot)
+		load_save(game_data, slot)
 
 	else: push_error("Error trying to import save file: unsupported device")
 
