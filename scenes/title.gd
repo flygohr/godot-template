@@ -11,3 +11,5 @@ func _on_options_button_pressed() -> void:
 
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color.CRIMSON)
+	
+	GameData.is_in_game = false

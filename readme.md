@@ -32,21 +32,24 @@ Want:
 - [ ] Responsive landscape layout with proper margins for mobile devices, and proper UI scale
 
 ### Devlog:
-- 2023-03-31
+- 2026-03-31
 	- Watching a ton of videos about save systems
 	- Setting up this project with some pseudocode
-- 2023-04-01
+- 2026-04-01
 	- Watching a ton of tutorials on pretty much anything lmao
 	- Started work on the scenes manager
 	- Defined other important screens
-- 2023-04-02
+- 2026-04-02
 	- Learning about localization
-- 2023-04-03
+- 2026-04-03
 	- Adding save and load
 	- Added download savegame
-- 2023-04-04
+- 2026-04-04
 	- Finished setting up HTML5 File Dialogs
-- 2023-04-05
+- 2026-04-05
 	- Added an on-screen debugger option to check stuff on mobile
 	- Started fiddling with screen sizes
 	- Troubleshooting the web export not working on iOS
+- 2026-04-06
+	- Spent my morning trying to debug stupid iOS issues. It works fine everywhere else
+	

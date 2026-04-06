@@ -3,12 +3,16 @@ extends Node2D
 const TITLE_SCREEN_SCENE: StringName = ScenesConstants.SCENE_PATHS[ScenesConstants.KEY_TITLE_SCREEN]
 const SETTINGS_SCREEN_SCENE: StringName = ScenesConstants.SCENE_PATHS[ScenesConstants.KEY_SETTINGS_SCREEN]
 
-@onready var text_edit: TextEdit = $CanvasLayer/VBoxContainer/MarginContainer/VBoxContainer2/TextEdit
+@onready var text_edit: TextEdit = $UI/VBoxContainer/MarginContainer/VBoxContainer2/TextEdit
 
 func _ready() -> void:
+	
+	RenderingServer.set_default_clear_color(Color.DARK_CYAN)
+	
+	GameData.is_in_game = true
+	
 	await GameData.initiate_load_game_data()
 	text_edit.text = GameData.current["test textedit"]
-	RenderingServer.set_default_clear_color(Color.DARK_CYAN)
 
 func _on_settings_button_pressed() -> void:
 	ScenesManager.load_scene(SETTINGS_SCREEN_SCENE)
