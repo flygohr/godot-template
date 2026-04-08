@@ -4,3 +4,10 @@
 # Didn't know you could autoload entire scenes
 
 extends Node
+
+@onready var music_player: AudioStreamPlayer2D = $MusicPlayer
+@onready var sfx_player: AudioStreamPlayer2D = $SFXPlayer
+
+func _ready() -> void:
+	music_player.play()
+	sfx_player.play()

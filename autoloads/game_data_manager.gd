@@ -41,8 +41,8 @@ var current: Dictionary = DEFAULT_GAME_DATA.duplicate_deep() # Defaults to base 
 func _ready() -> void:
 	# Load and apply configuration
 	SavesManager.load_config(config)
-	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"),float(config[KEY_MUSIC_VOLUME]/100))
-	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"),float(config[KEY_SFX_VOLUME]/100))
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"),config[KEY_MUSIC_VOLUME]/100.00)
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"),config[KEY_SFX_VOLUME]/100.00)
 
 	SavesManager.load_save(current, active_save_slot)
 	
