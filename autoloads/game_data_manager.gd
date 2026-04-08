@@ -23,21 +23,20 @@ var is_in_game: bool = false # Track if in game for settings menu options
 # KEYS
 # Strings to organize the data into a Dictionary and later into a JSON
 const KEY_GAME_VERSION: String = "game version"
+const KEY_IS_NEW_GAME: String = "is new game"
 
 # DEFAULT GAME DATA
 # What to load into a new save
 const DEFAULT_GAME_DATA: Dictionary = {
-	KEY_GAME_VERSION: GAME_VERSION
+	KEY_GAME_VERSION: GAME_VERSION,
+	KEY_IS_NEW_GAME: true
 }
 
 # CURRENT GAME DATA
 # Dictionary to load the current state of the game into, and to pass into SavesManager
 # Also polling this every time I need to know something
-# var current: Dictionary = DEFAULT_GAME_DATA # Defaults to base game data on load
 
-var current: Dictionary = {
-		"test textedit": ""
-	}
+var current: Dictionary = DEFAULT_GAME_DATA.duplicate_deep() # Defaults to base game data on load
 
 func _ready() -> void:
 	# Load and apply configuration

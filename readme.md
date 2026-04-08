@@ -9,8 +9,8 @@ Working on a template with basic functionalities that I can use for game jams.
 - [x] Settings
 	- [x] Autosave and autoload config
 	- [x] Music and SFX sliders to impact audio
-- [ ] Title
-	- [ ] New game / continue based on savegame being present
+- [x] Title
+	- [x] New game / continue based on savegame being present
 - [x] Global theme
 - [ ] Export / import savefile
 	- [ ] Test clipboard method instead of this file thing, could help ditch the plugin
