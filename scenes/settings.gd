@@ -5,10 +5,9 @@ const GAME_SCREEN_SCENE: StringName = ScenesConstants.SCENE_PATHS[ScenesConstant
 
 var scene_to_back_to: StringName = TITLE_SCREEN_SCENE
 
-@onready var music_slider_value: Label = $CanvasLayer/MarginContainer/VBoxContainer/MusicSliderContainer/MusicSliderValue
-@onready var sfx_slider_value: Label = $CanvasLayer/MarginContainer/VBoxContainer/SFXSliderContainer/SFXSliderValue
-@onready var full_screen_check_button: CheckButton = $CanvasLayer/MarginContainer/VBoxContainer/FullScreenToggle/FullScreenCheckButton
-@onready var quit_button: Button = $CanvasLayer/MarginContainer/VBoxContainer/QuitButton
+@onready var music_slider_value: Label = $CanvasLayer/CenterContainer/VBoxContainer/MusicSliderContainer/MusicSliderValue
+@onready var sfx_slider_value: Label = $CanvasLayer/CenterContainer/VBoxContainer/SFXSliderContainer/SFXSliderValue
+@onready var quit_button: Button = $CanvasLayer/CenterContainer/VBoxContainer/QuitButton
 
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color.DARK_GOLDENROD)
@@ -19,9 +18,6 @@ func _ready() -> void:
 		quit_button.show()
 	else: scene_to_back_to = TITLE_SCREEN_SCENE
 	
-	# Sets the toggle button for fullscreen to its correct value upon loading
-	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN: full_screen_check_button.button_pressed = true
-	else: full_screen_check_button.button_pressed = false
 
 func _on_back_button_pressed() -> void:
 	ScenesManager.load_scene(scene_to_back_to)
@@ -31,12 +27,6 @@ func _on_export_save_button_pressed() -> void:
 
 func _on_import_save_button_pressed() -> void:
 	SavesManager.import_save(GameData.current, GameData.active_save_slot)
-
-func _on_check_button_toggled(button_pressed: bool) -> void:
-	if button_pressed == true:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _on_quit_button_pressed() -> void:
 		ScenesManager.load_scene(TITLE_SCREEN_SCENE)

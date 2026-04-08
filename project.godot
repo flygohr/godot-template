@@ -31,7 +31,8 @@ DebugInfo="*uid://de8n5gdg7gtbr"
 
 window/size/viewport_width=192
 window/size/viewport_height=192
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/handheld/orientation=6
 
 [editor_plugins]
