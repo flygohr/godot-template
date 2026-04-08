@@ -39,6 +39,11 @@ window/handheld/orientation=6
 
 enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/html5_file_dialog/plugin.cfg")
 
+[gui]
+
+theme/custom="uid://d2s1eqi0btoeb"
+theme/custom_font="uid://x61fcsihg35g"
+
 [internationalization]
 
 locale/translation_add_builtin_strings_to_pot=true

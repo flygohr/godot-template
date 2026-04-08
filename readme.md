@@ -1,5 +1,8 @@
 Working on a template with basic functionalities that I can use for game jams.
 
+### Credits:
+- Font: https://rurr.itch.io/tremolo-mono
+
 ### Assumptions:
 - Web only
 - Responsive, landscape

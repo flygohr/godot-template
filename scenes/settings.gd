@@ -5,9 +5,9 @@ const GAME_SCREEN_SCENE: StringName = ScenesConstants.SCENE_PATHS[ScenesConstant
 
 var scene_to_back_to: StringName = TITLE_SCREEN_SCENE
 
-@onready var music_slider_value: Label = $CanvasLayer/CenterContainer/VBoxContainer/MusicSliderContainer/MusicSliderValue
-@onready var sfx_slider_value: Label = $CanvasLayer/CenterContainer/VBoxContainer/SFXSliderContainer/SFXSliderValue
-@onready var quit_button: Button = $CanvasLayer/CenterContainer/VBoxContainer/QuitButton
+@onready var music_slider_value: Label = $CanvasLayer/MarginContainer/VBoxContainer/MusicSliderContainer/MusicSliderValue
+@onready var sfx_slider_value: Label = $CanvasLayer/MarginContainer/VBoxContainer/SFXSliderContainer/SFXSliderValue
+@onready var quit_button: Button = $CanvasLayer/MarginContainer/VBoxContainer/QuitButton
 
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color.DARK_GOLDENROD)
