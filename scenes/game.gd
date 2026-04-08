@@ -3,12 +3,8 @@ extends Node2D
 const TITLE_SCREEN_SCENE: StringName = ScenesConstants.SCENE_PATHS[ScenesConstants.KEY_TITLE_SCREEN]
 const SETTINGS_SCREEN_SCENE: StringName = ScenesConstants.SCENE_PATHS[ScenesConstants.KEY_SETTINGS_SCREEN]
 
-func _ready() -> void:
-	
-	RenderingServer.set_default_clear_color(Color.DARK_CYAN)
-	
+func _ready() -> void:	
 	GameData.is_in_game = true
-	
 	GameData.initiate_load_game_data()
 
 func _on_settings_button_pressed() -> void:

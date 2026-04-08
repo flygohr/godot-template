@@ -8,12 +8,15 @@ const SAVES_DIRECTORY: String = "saves"
 const SLOT_DIRECTORY_NAME: String = "slot_"
 const SAVE_NAME: String = "save.json"
 
+const CONFIG_DIRECTORY: String = "config"
+const CONFIG_NAME: String = "config.json"
+
 # Feed this a dictionary of data and a number for the slot to save in
 func save_game(game_data: Dictionary, slot: int = 1) -> void:
 	
 	# Checking if the saves directory exists, and if not, creating it
 	var file_path: String = str("user://",SAVES_DIRECTORY,"/",SLOT_DIRECTORY_NAME,slot,"/")
-	check_saves_directory(file_path)
+	check_directory(file_path)
 	
 	var save_file: String = str(file_path, SAVE_NAME)
 	
@@ -43,7 +46,7 @@ func load_save(game_data: Dictionary, slot: int = 1) -> void:
 	
 	# Checking if the saves directory exists, and if not, creating it
 	var file_path: String = str("user://",SAVES_DIRECTORY,"/",SLOT_DIRECTORY_NAME,slot,"/")
-	check_saves_directory(file_path)
+	check_directory(file_path)
 	
 	var save_file: String = str(file_path, SAVE_NAME)
 	if FileAccess.file_exists(save_file):
@@ -56,7 +59,7 @@ func load_save(game_data: Dictionary, slot: int = 1) -> void:
 		opened_file.close()
 		
 		# Parsing opened string as JSON
-		var parsed_game_data: Dictionary = _parse_game_data(string_data)
+		var parsed_game_data: Dictionary = _parse_data(string_data)
 			
 		# Matching parsed data to pre-existing game data. This verifies the data and drops old keys
 		for key in game_data:
@@ -66,9 +69,69 @@ func load_save(game_data: Dictionary, slot: int = 1) -> void:
 
 	else:
 		print("No game data found. Keeping data as is.")
+
+	
+func save_config(config_data: Dictionary) -> void:
+	
+	var standalone_config_data: Dictionary = config_data.duplicate_deep()
+	
+	# Checking if the saves directory exists, and if not, creating it
+	var file_path: String = str("user://",CONFIG_DIRECTORY,"/")
+	check_directory(file_path)
+	
+	var config_file: String = str(file_path, CONFIG_NAME)
+	
+	# Accessing the config file and writing to it
+	print(str("Accessing config file at: ", config_file))
+	var opened_file: FileAccess = FileAccess.open(config_file, FileAccess.WRITE)
+	if opened_file == null:
+		push_error("Error opening file at ", config_file, ", error: ", FileAccess.get_open_error())
+		return
 		
+	#TODO: Write to a .tmp file first
+	standalone_config_data.sort()
+	print(str("Converting this data to JSON: ", standalone_config_data))
+	for key in standalone_config_data:
+		match typeof(standalone_config_data[key]):
+			TYPE_VECTOR2: standalone_config_data[key] = _vec2_to_dict(standalone_config_data[key])
+			TYPE_VECTOR3: standalone_config_data[key] = _vec3_to_dict(standalone_config_data[key])
+			TYPE_COLOR: standalone_config_data[key] = _color_to_dict(standalone_config_data[key])
+			TYPE_INT: standalone_config_data[key] = _int_to_dict(standalone_config_data[key])
+	var json_string = JSON.stringify(standalone_config_data)
+	print(str("The converted data looks like this: ", json_string))
+	opened_file.store_line(json_string)
+	opened_file.close()
+
+func load_config(config_data: Dictionary) -> void:
+	
+	# Checking if the config directory exists, and if not, creating it
+	var file_path: String = str("user://",CONFIG_DIRECTORY,"/")
+	check_directory(file_path)
+	
+	var config_file: String = str(file_path, CONFIG_NAME)
+	if FileAccess.file_exists(config_file):
+		
+		# Opening save slot and grabbing saved string
+		print("Now loading config data")
+		var opened_file: FileAccess = FileAccess.open(config_file, FileAccess.READ)
+		var string_data: String = opened_file.get_line()
+		print(str("Loaded config data is: ", string_data))
+		opened_file.close()
+		
+		# Parsing opened string as JSON
+		var parsed_config_data: Dictionary = _parse_data(string_data)
+			
+		# Matching parsed data to pre-existing game data. This verifies the data and drops old keys
+		for key in config_data:
+			if parsed_config_data.has(key): config_data[key] = parsed_config_data[key]
+		config_data.sort()
+		print("Loaded config data looks like this: ", config_data)
+
+	else:
+		print("No config data found. Keeping data as is.")
+	
 # Checking if the saves directory exists, and if not, creating it	
-func check_saves_directory(file_path: String):
+func check_directory(file_path: String):
 	if DirAccess.dir_exists_absolute(file_path) == false:
 		print(str("Saves directory doesn't exist yet, creating it at: ", file_path))
 		DirAccess.make_dir_recursive_absolute(file_path)
@@ -111,14 +174,14 @@ func import_save(game_data: Dictionary, slot: int = 1) -> void:
 		var string_data = await file_data.as_text()
 		# Now I can turn the string data into a json, then into a dictionary, and feeding it into load_save
 		# I might need to turn the json parsing into its own function to prevent duplicate files
-		var parsed_data: Dictionary = _parse_game_data(string_data)
+		var parsed_data: Dictionary = _parse_data(string_data)
 		print(str("Successfully imported this data: ", parsed_data))
 		save_game(parsed_data, slot)
 		load_save(game_data, slot)
 
 	else: push_error("Error trying to import save file: unsupported device")
 
-func _parse_game_data(data: String) -> Dictionary:
+func _parse_data(data: String) -> Dictionary:
 	var json = JSON.new()
 	if json.parse(data) == OK:
 		var parsed_data: Dictionary = json.get_data()

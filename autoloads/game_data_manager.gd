@@ -6,10 +6,20 @@ extends Node
 const GAME_NAME: String = "Godot Jam Template"
 const GAME_VERSION: String = "0.1"
 
+# GAME CONFIG
+const KEY_MUSIC_VOLUME: String = "music_volume"
+const KEY_SFX_VOLUME: String = "sfx_volume"
+
+var config: Dictionary = {
+	KEY_MUSIC_VOLUME: 100,
+	KEY_SFX_VOLUME: 100
+}
+
 # GAME DATA
 # Variables to keep track of during gameplay
 var active_save_slot: int = 1
 var is_in_game: bool = false # Track if in game for settings menu options
+
 # KEYS
 # Strings to organize the data into a Dictionary and later into a JSON
 const KEY_GAME_VERSION: String = "game version"
@@ -30,8 +40,13 @@ var current: Dictionary = {
 	}
 
 func _ready() -> void:
-	SavesManager.load_save(current, active_save_slot)
+	# Load and apply configuration
+	SavesManager.load_config(config)
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"),float(config[KEY_MUSIC_VOLUME]/100))
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"),float(config[KEY_SFX_VOLUME]/100))
 
+	SavesManager.load_save(current, active_save_slot)
+	
 func initiate_load_game_data() -> void:
 	SavesManager.load_save(current, active_save_slot)
 

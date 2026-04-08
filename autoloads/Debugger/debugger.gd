@@ -9,7 +9,6 @@ var output_string: String = ""
 
 func _ready() -> void:
 	add_line(str("OS name: ", OS.get_name()))
-	RenderingServer.set_default_clear_color(Color.ORANGE)
 
 func add_line(s: String) -> void:
 	output_string = ""

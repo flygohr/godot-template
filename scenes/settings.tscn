@@ -28,6 +28,7 @@ size_flags_vertical = 4
 
 [node name="MusicSliderContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1422010896]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="MusicSliderLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/MusicSliderContainer" unique_id=1271875001]
 custom_minimum_size = Vector2(32, 0)
@@ -52,6 +53,7 @@ horizontal_alignment = 2
 
 [node name="SFXSliderContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1392802761]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="SFXSliderLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/SFXSliderContainer" unique_id=1345289020]
 custom_minimum_size = Vector2(32, 0)

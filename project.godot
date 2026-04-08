@@ -29,11 +29,10 @@ DebugInfo="*uid://de8n5gdg7gtbr"
 
 [display]
 
-window/size/viewport_width=192
+window/size/viewport_width=272
 window/size/viewport_height=192
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
-window/handheld/orientation=6
+window/stretch/aspect="keep_height"
 
 [editor_plugins]
 

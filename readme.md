@@ -3,25 +3,17 @@ Working on a template with basic functionalities that I can use for game jams.
 ### Credits:
 - Font: https://rurr.itch.io/tremolo-mono
 
-### Assumptions:
-- Web only
-- Responsive, landscape
-
 ### To-do:
-- [ ] Safe margins for mobile: https://youtu.be/MeURXJij6PA?is=aEtPtoM4Sa6gFJav
-- [ ] Auto stretch game area to fit whole screen, no black bars
-- [ ] Landscape only: prevent the game from being played if width < height
-- [ ] Settings
-	- [ ] Autosave and autoload config
-		- [ ] Add config flag to save system, optional default false
-	- [ ] Music and SFX sliders to impact audio
-	- [ ] Fullscreen setting resets when exiting fullscreen
+- [x] Auto stretch game area to fit whole screen, no black bars
+- [x] Landscape only: prevent the game from being played if width < height
+- [x] Settings
+	- [x] Autosave and autoload config
+	- [x] Music and SFX sliders to impact audio
 - [ ] Title
 	- [ ] New game / continue based on savegame being present
-- [ ] Global theme
+- [x] Global theme
 - [ ] Export / import savefile
 	- [ ] Test clipboard method instead of this file thing, could help ditch the plugin
-- [ ] Prepare for translation support, RTL
 
 ### Devlog:
 - 2026-03-31
@@ -46,3 +38,5 @@ Working on a template with basic functionalities that I can use for game jams.
 	- Spent my morning trying to debug stupid iOS issues. It works fine everywhere else
 - 2026-04-07
 	- Getting my shit together because the jam is in 3 days
+- 2026-04-08
+	- Finally getting some work done: music and sfx and config sorted out, new font, fixed viewport issues

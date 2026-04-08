@@ -9,7 +9,5 @@ func _on_play_button_pressed() -> void:
 func _on_options_button_pressed() -> void:
 	ScenesManager.load_scene(SETTINGS_SCENE)
 
-func _ready() -> void:
-	RenderingServer.set_default_clear_color(Color.CRIMSON)
-	
+func _ready() -> void:	
 	GameData.is_in_game = false
