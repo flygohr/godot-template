@@ -1,35 +1,24 @@
 Working on a template with basic functionalities that I can use for game jams.
 
-Want:
-- [x] Scenes manager
-- [ ] Save system with:
-	- [x] Save, load, reset game -> Resetting a game will be done by the GameData, the SavesManager just takes care of replacing a slot with empty data or smth
-	- [ ] .tmp corruption protection, at least a basic ones
-	- [x] Slots system, at last 3 datestamped previous .bak files per slot
-	- [x] Export, import savefiles with native file pickers -> Web builds work a little different, need JavaScript
-		- [ ] Issues on iOS. If I don't solve them, need a replacement. Something like copy and pasting JSON data might work, let's see if OS clipboard works cross platform -> https://www.reddit.com/r/godot/s/JYh8wAo7V7. also no keyboard support, see https://godotengine.org/article/godot-web-progress-report-7/
-- [ ] Various game screens and enstablished flow
-	- [ ] Startup screen
-	- [x] Title screen
-		- [ ] New game / Continue (start a new game, resume last saved slot)
-		- [ ] Load game (open save slots manager)
-		- [ ] Options (open settings)
-		- [ ] Quit game
-	- [ ] Load game screen / saves manager (select a slot, play from it)
-	- [x] Game
-	- [x] Settings
-		- [ ] Back (to main menu / to game screen)
-		- [ ] Music and sfx controls
-		- [ ] Save game
-		- [ ] Load save -> saves manager
-- [ ] Options menu with accessibility controls
-	- [ ] Separate config file to create, load, and save back
-	- [ ] Reset to default
-- [ ] Audio setup
-	- [x] Main background music player
-	- [ ] Separate SFX manager 
-- [ ] Translation support right off the bat
-- [ ] Responsive landscape layout with proper margins for mobile devices, and proper UI scale
+### Assumptions:
+- Web only
+- Responsive, landscape
+
+### To-do:
+- [ ] Safe margins for mobile: https://youtu.be/MeURXJij6PA?is=aEtPtoM4Sa6gFJav
+- [ ] Auto stretch game area to fit whole screen, no black bars
+- [ ] Landscape only: prevent the game from being played if width < height
+- [ ] Settings
+	- [ ] Autosave and autoload config
+		- [ ] Add config flag to save system, optional default false
+	- [ ] Music and SFX sliders to impact audio
+	- [ ] Fullscreen setting resets when exiting fullscreen
+- [ ] Title
+	- [ ] New game / continue based on savegame being present
+- [ ] Global theme
+- [ ] Export / import savefile
+	- [ ] Test clipboard method instead of this file thing, could help ditch the plugin
+- [ ] Prepare for translation support, RTL
 
 ### Devlog:
 - 2026-03-31
@@ -52,4 +41,5 @@ Want:
 	- Troubleshooting the web export not working on iOS
 - 2026-04-06
 	- Spent my morning trying to debug stupid iOS issues. It works fine everywhere else
-	
+- 2026-04-07
+	- Getting my shit together because the jam is in 3 days

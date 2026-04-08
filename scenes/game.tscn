@@ -30,31 +30,4 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "MENU"
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer" unique_id=1506140150]
-layout_mode = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/VBoxContainer/MarginContainer" unique_id=2019933740]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/VBoxContainer/MarginContainer/VBoxContainer2" unique_id=1654151091]
-layout_mode = 2
-text = "Test data to save:"
-
-[node name="TextEdit" type="TextEdit" parent="UI/VBoxContainer/MarginContainer/VBoxContainer2" unique_id=1986172031]
-custom_minimum_size = Vector2(360, 200)
-layout_mode = 2
-size_flags_vertical = 4
-placeholder_text = "Data to save"
-
-[node name="TempSaveButton" type="Button" parent="UI/VBoxContainer/MarginContainer/VBoxContainer2" unique_id=1691268821]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "SAVE"
-
 [connection signal="pressed" from="UI/VBoxContainer/VBoxContainer/MarginContainer/MenuButton" to="." method="_on_settings_button_pressed"]
-[connection signal="text_changed" from="UI/VBoxContainer/MarginContainer/VBoxContainer2/TextEdit" to="." method="_on_text_edit_text_changed"]
-[connection signal="pressed" from="UI/VBoxContainer/MarginContainer/VBoxContainer2/TempSaveButton" to="." method="_on_temp_save_button_pressed"]

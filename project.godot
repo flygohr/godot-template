@@ -29,14 +29,18 @@ DebugInfo="*uid://de8n5gdg7gtbr"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_width=192
+window/size/viewport_height=192
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/handheld/orientation=6
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/html5_file_dialog/plugin.cfg")
+
+[internationalization]
+
+locale/translation_add_builtin_strings_to_pot=true
 
 [physics]
 
@@ -44,6 +48,7 @@ enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
