@@ -12,6 +12,7 @@ Working on a template with basic functionalities that I can use for game jams.
 - [x] Title
 	- [x] New game / continue based on savegame being present
 - [x] Global theme
+- [ ] Popup system with signals
 - [ ] Export / import savefile
 	- [ ] Test clipboard method instead of this file thing, could help ditch the plugin
 
@@ -40,3 +41,6 @@ Working on a template with basic functionalities that I can use for game jams.
 	- Getting my shit together because the jam is in 3 days
 - 2026-04-08
 	- Finally getting some work done: music and sfx and config sorted out, new font, fixed viewport issues
+- 2026-04-09
+	- Adjusted sliders and fonts for pixel art style
+	- Started working on popup manager, I want signals and buttons for "yes" and "no", and "next" use cases

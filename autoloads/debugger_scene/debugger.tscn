@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://de8n5gdg7gtbr"]
 
-[ext_resource type="Script" uid="uid://ct2fs6u8wcidq" path="res://autoloads/Debugger/debugger.gd" id="1_hkqyx"]
+[ext_resource type="Script" uid="uid://ct2fs6u8wcidq" path="res://autoloads/debugger_scene/debugger.gd" id="1_hkqyx"]
 
 [node name="Debugger" type="Node2D" unique_id=315184782]
 script = ExtResource("1_hkqyx")

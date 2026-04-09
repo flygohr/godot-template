@@ -18,6 +18,23 @@ offset_bottom = 19.0
 theme = ExtResource("2_yqjtg")
 text = "MENU"
 
+[node name="Popup1" type="Button" parent="UI" unique_id=918696167]
+offset_left = 96.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 48.0
+text = "POPUP 1"
+
+[node name="Popup2" type="Button" parent="UI" unique_id=730915304]
+visible = false
+offset_right = 8.0
+offset_bottom = 40.0
+
+[node name="Popup3" type="Button" parent="UI" unique_id=876009958]
+visible = false
+offset_right = 8.0
+offset_bottom = 40.0
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1786703548]
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D" unique_id=657729204]
@@ -28,3 +45,4 @@ position = Vector2(576, -192)
 texture = ExtResource("4_lbhrr")
 
 [connection signal="pressed" from="UI/MenuButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="UI/Popup1" to="." method="_on_popup_1_pressed"]

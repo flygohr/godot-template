@@ -31,13 +31,12 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="MusicSliderLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/MusicSliderContainer" unique_id=1271875001]
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(36, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Music:"
 
 [node name="MusicSlider" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/MusicSliderContainer" unique_id=1730764814]
-custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -56,13 +55,12 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="SFXSliderLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/SFXSliderContainer" unique_id=1345289020]
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(36, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "SFX:"
 
 [node name="SFXSlider" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/SFXSliderContainer" unique_id=33482297]
-custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4

@@ -12,3 +12,7 @@ func _ready() -> void:
 func _on_settings_button_pressed() -> void:
 	ScenesManager.load_scene(SETTINGS_SCREEN_SCENE)
 	
+
+
+func _on_popup_1_pressed() -> void:
+	PopupManager.show_popup("Testing the popup", PopupManager.Modes.CONFIRMATION)
