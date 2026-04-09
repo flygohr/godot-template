@@ -6,8 +6,7 @@ class_name ButtonEffectsComponent
 @export var animation_duration: float = 0.1
 @export var scale_amount: Vector2 = Vector2(1.0,1.0)
 @export var rotation_amount: float = 0.0
-@export var outline_color_hover: Color = Color.html("#FFFFFF")
-@export var outline_color_focus: Color = Color.html("#FFFFFF")
+@export var outline_color: Color = Color(1.0, 1.0, 1.0, 1.0)
 
 @onready var button: Button = get_parent()
 
@@ -17,10 +16,8 @@ var background_rect: ColorRect
 func _ready() -> void:
 	button.mouse_entered.connect(_on_mouse_hovered.bind(true))
 	button.mouse_exited.connect(_on_mouse_hovered.bind(false))
-	button.pressed.connect(_on_mouse_pressed)
 	
 	background_rect = ColorRect.new()
-	background_rect.hide()
 	background_rect.position += Vector2(-1, -1)
 	background_rect.size = button.size+Vector2(2,2)
 	background_rect.z_index = button.z_index -1
@@ -30,14 +27,7 @@ func _ready() -> void:
 	
 func _on_mouse_hovered(hovered: bool) -> void:
 	reset_tween()
-	tween.tween_property(background_rect, "visible", true if hovered else false, 0.0)
-	tween.tween_property(background_rect, "color", outline_color_hover if hovered else Color(0.0, 0.0, 0.0, 0.0), animation_duration)
-
-func _on_mouse_pressed() -> void:
-	reset_tween()
-	
-	tween.tween_property(background_rect, "visible", true, 0.0)
-	tween.tween_property(background_rect, "color", outline_color_focus, animation_duration)
+	tween.tween_property(background_rect, "color", outline_color if hovered else Color(0.0, 0.0, 0.0, 0.0), animation_duration)
 	
 func reset_tween() -> void:
 	if tween:

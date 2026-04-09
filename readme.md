@@ -2,6 +2,7 @@ Working on a template with basic functionalities that I can use for game jams.
 
 ### Credits:
 - Font: https://rurr.itch.io/tremolo-mono
+- HTML5 File Dialog plugin: https://gitlab.com/mocchapi/godot-4-html5-file-dialogs
 
 ### To-do:
 - [x] Auto stretch game area to fit whole screen, no black bars
@@ -12,7 +13,7 @@ Working on a template with basic functionalities that I can use for game jams.
 - [x] Title
 	- [x] New game / continue based on savegame being present
 - [x] Global theme
-- [ ] Popup system with signals
+- [x] Popup system with signals
 - [ ] Export / import savefile
 	- [ ] Test clipboard method instead of this file thing, could help ditch the plugin
 
@@ -44,3 +45,4 @@ Working on a template with basic functionalities that I can use for game jams.
 - 2026-04-09
 	- Adjusted sliders and fonts for pixel art style
 	- Started working on popup manager, I want signals and buttons for "yes" and "no", and "next" use cases
+	- Finished the popup manager basics, added buttons flair

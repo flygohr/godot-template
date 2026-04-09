@@ -12,7 +12,8 @@ signal next_button_pressed
 
 enum Modes {CONFIRMATION, DIALOG}
 
-var tween: Tween
+#TODO: modes is confusing as hell, just do two functions with different parameters
+#TODO: work on a fade in and fade out of popups
 
 func show_popup(popup_text: String, mode: int, no_button_text: String = "No", yes_button_text: String = "Yes", next_button_text: String = "Next") -> void:
 	match mode:
