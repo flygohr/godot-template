@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bso63le5evvba" path="res://autoloads/popup_manager/popup_manager.gd" id="1_curds"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gl0tk"]
-bg_color = Color(0, 0, 0, 0.49803922)
+bg_color = Color(0, 0, 0, 0.7490196)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ejtj"]
 bg_color = Color(0.45581734, 0.45581734, 0.45581716, 1)
@@ -84,3 +84,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "NEXT"
+
+[connection signal="pressed" from="Popup/MarginContainer/VBoxContainer/HBoxContainer/NoButton" to="." method="_on_no_button_pressed"]
+[connection signal="pressed" from="Popup/MarginContainer/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="Popup/MarginContainer/VBoxContainer/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
