@@ -7,6 +7,7 @@ extends Node
 const SAVES_DIRECTORY: String = "saves"
 const SLOT_DIRECTORY_NAME: String = "slot_"
 const SAVE_NAME: String = "save.json"
+const TEMP_SAVE_NAME: String = "save.tmp"
 
 const CONFIG_DIRECTORY: String = "config"
 const CONFIG_NAME: String = "config.json"
@@ -18,13 +19,13 @@ func save_game(game_data: Dictionary, slot: int = 1) -> void:
 	var file_path: String = str("user://",SAVES_DIRECTORY,"/",SLOT_DIRECTORY_NAME,slot,"/")
 	check_directory(file_path)
 	
-	var save_file: String = str(file_path, SAVE_NAME)
+	var temp_save_file: String = str(file_path, TEMP_SAVE_NAME)
 	
 	# Accessing the save file and writing to it
-	print(str("Accessing save file at: ", save_file))
-	var opened_file: FileAccess = FileAccess.open(save_file, FileAccess.WRITE)
+	print(str("Accessing temporary save file at: ", temp_save_file))
+	var opened_file: FileAccess = FileAccess.open(temp_save_file, FileAccess.WRITE)
 	if opened_file == null:
-		push_error("Error opening file at ", save_file, ", error: ", FileAccess.get_open_error())
+		push_error("Error opening file at ", temp_save_file, ", error: ", FileAccess.get_open_error())
 		return
 		
 	#TODO: Write to a .tmp file first
@@ -40,6 +41,11 @@ func save_game(game_data: Dictionary, slot: int = 1) -> void:
 	print(str("The converted data looks like this: ", json_string))
 	opened_file.store_line(json_string)
 	opened_file.close()
+	
+	var final_save_file: String = str(file_path, SAVE_NAME)
+	
+	# Replacing the .tmp file if everything went correctly at this stage
+	DirAccess.rename_absolute(temp_save_file, final_save_file)
 
 # Load the save from a slot, match it to a passed-in pre-existing structure
 func load_save(game_data: Dictionary, slot: int = 1) -> void:

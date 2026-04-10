@@ -11,7 +11,7 @@ class_name ButtonEffectsComponent
 @onready var button: Button = get_parent()
 
 var tween: Tween
-#TODO: learn how to use shaders in the future
+#TODO: learn how to use shaders in the future 
 var background_topside: ColorRect
 var background_rightside: ColorRect
 var background_bottomside: ColorRect

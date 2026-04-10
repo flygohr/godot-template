@@ -24,12 +24,14 @@ var is_in_game: bool = false # Track if in game for settings menu options
 # Strings to organize the data into a Dictionary and later into a JSON
 const KEY_GAME_VERSION: String = "game version"
 const KEY_IS_NEW_GAME: String = "is new game"
+const KEY_DUMMY_DATA: String = "dummy text data"
 
 # DEFAULT GAME DATA
 # What to load into a new save
 const DEFAULT_GAME_DATA: Dictionary = {
 	KEY_GAME_VERSION: GAME_VERSION,
-	KEY_IS_NEW_GAME: true
+	KEY_IS_NEW_GAME: true,
+	KEY_DUMMY_DATA: "Default dummy data"
 }
 
 # CURRENT GAME DATA

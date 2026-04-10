@@ -46,7 +46,28 @@ text = "POPUP 2"
 script = ExtResource("3_iywne")
 metadata/_custom_type_script = "uid://c3p5hehud2mfn"
 
+[node name="TextEdit" type="TextEdit" parent="UI" unique_id=1130347035]
+offset_left = 64.0
+offset_top = 80.0
+offset_right = 192.0
+offset_bottom = 128.0
+
+[node name="Save" type="Button" parent="UI" unique_id=581423935]
+offset_left = 64.0
+offset_top = 144.0
+offset_right = 112.0
+offset_bottom = 160.0
+text = "SAVE"
+
+[node name="Load" type="Button" parent="UI" unique_id=566569554]
+offset_left = 144.0
+offset_top = 144.0
+offset_right = 192.0
+offset_bottom = 160.0
+text = "LOAD"
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1786703548]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D" unique_id=657729204]
 texture = ExtResource("3_lnu2h")
@@ -58,3 +79,5 @@ texture = ExtResource("4_lbhrr")
 [connection signal="pressed" from="UI/MenuButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="UI/Popup1" to="." method="_on_popup_1_pressed"]
 [connection signal="pressed" from="UI/Popup2" to="." method="_on_popup_2_pressed"]
+[connection signal="pressed" from="UI/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="UI/Load" to="." method="_on_load_pressed"]
