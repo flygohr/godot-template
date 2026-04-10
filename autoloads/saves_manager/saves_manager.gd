@@ -11,6 +11,7 @@ const TEMP_SAVE_NAME: String = "save.tmp"
 
 const CONFIG_DIRECTORY: String = "config"
 const CONFIG_NAME: String = "config.json"
+const TEMP_CONFIG_NAME: String = "config.tmp"
 
 # Feed this a dictionary of data and a number for the slot to save in
 func save_game(game_data: Dictionary, slot: int = 1) -> void:
@@ -28,7 +29,6 @@ func save_game(game_data: Dictionary, slot: int = 1) -> void:
 		push_error("Error opening file at ", temp_save_file, ", error: ", FileAccess.get_open_error())
 		return
 		
-	#TODO: Write to a .tmp file first
 	game_data.sort()
 	print(str("Converting this data to JSON: ", game_data))
 	for key in game_data:
@@ -85,16 +85,15 @@ func save_config(config_data: Dictionary) -> void:
 	var file_path: String = str("user://",CONFIG_DIRECTORY,"/")
 	check_directory(file_path)
 	
-	var config_file: String = str(file_path, CONFIG_NAME)
+	var temp_config_file: String = str(file_path, TEMP_CONFIG_NAME)
 	
 	# Accessing the config file and writing to it
-	print(str("Accessing config file at: ", config_file))
-	var opened_file: FileAccess = FileAccess.open(config_file, FileAccess.WRITE)
+	print(str("Accessing config file at: ", temp_config_file))
+	var opened_file: FileAccess = FileAccess.open(temp_config_file, FileAccess.WRITE)
 	if opened_file == null:
-		push_error("Error opening file at ", config_file, ", error: ", FileAccess.get_open_error())
+		push_error("Error opening file at ", temp_config_file, ", error: ", FileAccess.get_open_error())
 		return
 		
-	#TODO: Write to a .tmp file first
 	standalone_config_data.sort()
 	print(str("Converting this data to JSON: ", standalone_config_data))
 	for key in standalone_config_data:
@@ -107,6 +106,12 @@ func save_config(config_data: Dictionary) -> void:
 	print(str("The converted data looks like this: ", json_string))
 	opened_file.store_line(json_string)
 	opened_file.close()
+	
+	var final_config_file: String = str(file_path, CONFIG_NAME)
+	
+	# Replacing the .tmp file if everything went correctly at this stage
+	DirAccess.rename_absolute(temp_config_file, final_config_file)
+	
 
 func load_config(config_data: Dictionary) -> void:
 	
