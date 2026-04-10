@@ -14,11 +14,11 @@ func _on_settings_button_pressed() -> void:
 	ScenesManager.load_scene(SETTINGS_SCREEN_SCENE)
 	
 func _on_popup_1_pressed() -> void:
-	PopupManager.show_popup("Testing the popup", PopupManager.Modes.CONFIRMATION)
+	PopupManager.show_popup_confirmation("Testing the popup")
 	await PopupManager.yes_button_pressed
 	popup_2.show()
 
 func _on_popup_2_pressed() -> void:
-	PopupManager.show_popup("Testing the dialog, part 1", PopupManager.Modes.DIALOG)
+	PopupManager.show_popup_dialog("Testing the dialog, part 1")
 	await PopupManager.next_button_pressed
-	PopupManager.show_popup("Testing the dialog, part 2", PopupManager.Modes.DIALOG,"","","Continue")
+	PopupManager.show_popup_dialog("Testing the dialog, part 2", "Continue")

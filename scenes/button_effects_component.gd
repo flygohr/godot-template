@@ -11,24 +11,51 @@ class_name ButtonEffectsComponent
 @onready var button: Button = get_parent()
 
 var tween: Tween
-var background_rect: ColorRect
+var background_topside: ColorRect
+var background_rightside: ColorRect
+var background_bottomside: ColorRect
+var background_leftside: ColorRect
 
 func _ready() -> void:
 	button.mouse_entered.connect(_on_mouse_hovered.bind(true))
 	button.mouse_exited.connect(_on_mouse_hovered.bind(false))
 	
-	background_rect = ColorRect.new()
-	background_rect.position += Vector2(-1, -1)
-	background_rect.size = button.size+Vector2(2,2)
-	background_rect.z_index = button.z_index -1
-	background_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	background_rect.color = Color(1.0, 1.0, 1.0, 0.0)
-	button.add_child.call_deferred(background_rect)
+	background_topside  = ColorRect.new()
+	background_rightside  = ColorRect.new()
+	background_bottomside  = ColorRect.new()
+	background_leftside  = ColorRect.new()
+	
+	recalculate_outline_size(background_topside, background_rightside, background_bottomside, background_leftside)
+	
+	background_topside.color = Color(1.0, 1.0, 1.0, 0.0)
+	background_rightside.color = Color(1.0, 1.0, 1.0, 0.0)
+	background_bottomside.color = Color(1.0, 1.0, 1.0, 0.0)
+	background_leftside.color = Color(1.0, 1.0, 1.0, 0.0)
+	
+	button.add_child.call_deferred(background_topside)
+	button.add_child.call_deferred(background_rightside)
+	button.add_child.call_deferred(background_bottomside)
+	button.add_child.call_deferred(background_leftside)
 	
 func _on_mouse_hovered(hovered: bool) -> void:
 	reset_tween()
-	tween.tween_property(background_rect, "color", outline_color if hovered else Color(0.0, 0.0, 0.0, 0.0), animation_duration)
+	recalculate_outline_size(background_topside, background_rightside, background_bottomside, background_leftside)
+	tween.tween_property(background_topside, "color", outline_color if hovered else Color(0.0, 0.0, 0.0, 0.0), animation_duration)
+	tween.tween_property(background_rightside, "color", outline_color if hovered else Color(0.0, 0.0, 0.0, 0.0), animation_duration)
+	tween.tween_property(background_bottomside, "color", outline_color if hovered else Color(0.0, 0.0, 0.0, 0.0), animation_duration)
+	tween.tween_property(background_leftside, "color", outline_color if hovered else Color(0.0, 0.0, 0.0, 0.0), animation_duration)
 	
+func recalculate_outline_size(background_topside, background_rightside, background_bottomside, background_leftside) -> void:
+	background_topside.position = Vector2(-1, -1)
+	background_rightside.position = Vector2(button.size.x, -1)
+	background_bottomside.position = Vector2(-1, button.size.y)
+	background_leftside.position = Vector2(-1, -1)
+	
+	background_topside.size = Vector2(button.size.x + 2, 1)
+	background_rightside.size = Vector2(1, button.size.y + 2)
+	background_bottomside.size = Vector2(button.size.x + 2, 1)
+	background_leftside.size = Vector2(1, button.size.y + 2)
+
 func reset_tween() -> void:
 	if tween:
 		tween.kill()
