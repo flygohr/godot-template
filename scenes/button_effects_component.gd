@@ -11,6 +11,7 @@ class_name ButtonEffectsComponent
 @onready var button: Button = get_parent()
 
 var tween: Tween
+#TODO: learn how to use shaders in the future
 var background_topside: ColorRect
 var background_rightside: ColorRect
 var background_bottomside: ColorRect
@@ -45,16 +46,16 @@ func _on_mouse_hovered(hovered: bool) -> void:
 	tween.tween_property(background_bottomside, "color", outline_color if hovered else Color(0.0, 0.0, 0.0, 0.0), animation_duration)
 	tween.tween_property(background_leftside, "color", outline_color if hovered else Color(0.0, 0.0, 0.0, 0.0), animation_duration)
 	
-func recalculate_outline_size(background_topside, background_rightside, background_bottomside, background_leftside) -> void:
-	background_topside.position = Vector2(-1, -1)
-	background_rightside.position = Vector2(button.size.x, -1)
-	background_bottomside.position = Vector2(-1, button.size.y)
-	background_leftside.position = Vector2(-1, -1)
+func recalculate_outline_size(topside, rightside, bottomside, leftside) -> void:
+	topside.position = Vector2(-1, -1)
+	rightside.position = Vector2(button.size.x, -1)
+	bottomside.position = Vector2(-1, button.size.y)
+	leftside.position = Vector2(-1, -1)
 	
-	background_topside.size = Vector2(button.size.x + 2, 1)
-	background_rightside.size = Vector2(1, button.size.y + 2)
-	background_bottomside.size = Vector2(button.size.x + 2, 1)
-	background_leftside.size = Vector2(1, button.size.y + 2)
+	topside.size = Vector2(button.size.x + 2, 1)
+	rightside.size = Vector2(1, button.size.y + 2)
+	bottomside.size = Vector2(button.size.x + 2, 1)
+	leftside.size = Vector2(1, button.size.y + 2)
 
 func reset_tween() -> void:
 	if tween:
