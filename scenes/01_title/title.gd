@@ -1,7 +1,7 @@
 extends Node2D
 
-const INITIAL_SCENE: StringName = ScenesConstants.SCENE_PATHS[ScenesConstants.KEY_GAME_SCREEN]
-const SETTINGS_SCENE: StringName = ScenesConstants.SCENE_PATHS[ScenesConstants.KEY_SETTINGS_SCREEN]
+const INITIAL_SCENE: StringName = ScenesManager.SCENE_PATHS[ScenesManager.KEY_GAME_SCREEN]
+const SETTINGS_SCENE: StringName = ScenesManager.SCENE_PATHS[ScenesManager.KEY_SETTINGS_SCREEN]
 
 @onready var play_button: Button = $CanvasLayer/MarginContainer/VBoxContainer/PlayButton
 

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://q3362xrshrsu"]
 
-[ext_resource type="Script" uid="uid://c3lyi851kms3q" path="res://scenes/title.gd" id="1_4ignj"]
-[ext_resource type="Script" uid="uid://c3p5hehud2mfn" path="res://scenes/button_effects_component.gd" id="2_wosw1"]
+[ext_resource type="Script" uid="uid://c3lyi851kms3q" path="res://scenes/01_title/title.gd" id="1_4ignj"]
+[ext_resource type="Script" uid="uid://c3p5hehud2mfn" path="res://scripts/button_effects_component.gd" id="2_wosw1"]
 
 [node name="Ttitle" type="Node2D" unique_id=189399056]
 script = ExtResource("1_4ignj")

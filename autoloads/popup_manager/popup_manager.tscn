@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b63w0p3ooheuj"]
 
 [ext_resource type="Script" uid="uid://bso63le5evvba" path="res://autoloads/popup_manager/popup_manager.gd" id="1_curds"]
-[ext_resource type="Script" uid="uid://c3p5hehud2mfn" path="res://scenes/button_effects_component.gd" id="2_6k647"]
+[ext_resource type="Script" uid="uid://c3p5hehud2mfn" path="res://scripts/button_effects_component.gd" id="2_6k647"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gl0tk"]
 bg_color = Color(0, 0, 0, 0.7490196)
@@ -10,6 +10,7 @@ bg_color = Color(0, 0, 0, 0.7490196)
 bg_color = Color(0.45581734, 0.45581734, 0.45581716, 1)
 
 [node name="PopupManager" type="Node2D" unique_id=1256655826]
+process_mode = 3
 script = ExtResource("1_curds")
 
 [node name="Popup" type="CanvasLayer" parent="." unique_id=422725014]

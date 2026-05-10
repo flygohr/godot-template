@@ -52,3 +52,10 @@ Working on a template with basic functionalities that I can use for game jams.
 - 2026-04-10
 	- Temp file saving
 	- Adjusted button flavor, bit hacky but it works
+- 2026-05-10
+	- Updating the template with feedback from my Space Druid jam
+	- Pause menu now always loaded
+	- Removing default assets
+	- Removed debugger because... F12 exists on web
+	- Merged ScenesConstants into the ScenesManager, didn't make sense to have them separate
+	

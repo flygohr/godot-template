@@ -4,7 +4,7 @@
 extends Node
 
 const GAME_NAME: String = "Godot Jam Template"
-const GAME_VERSION: String = "0.1"
+const GAME_VERSION: String = "0.2"
 
 # GAME CONFIG
 const KEY_MUSIC_VOLUME: String = "music_volume"

@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cr2pi5vsspeji" path="res://audio/sfx/593835__josefpres__bass-loops-037-short-loop-120-bpm.wav" id="3_722mk"]
 
 [node name="MusicManager" type="Node" unique_id=2088791662]
+process_mode = 3
 script = ExtResource("1_tn5dr")
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=707347176]
